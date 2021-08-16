@@ -8,11 +8,17 @@ SRCS = srcs/philo.c \
 
 OBJS = $(SRCS:.c=.o)
 
-CC = clang-9
+UNAME_S := $(shell uname -s)
+   ifeq ($(UNAME_S),Linux)
+        CC=clang-9
+    endif
+    ifeq ($(UNAME_S),Darwin)
+        CC=clang
+    endif
 
 CFLAGS = -Wall -Wextra -Werror -pthread
 
-GFLAG = -g3
+GFLAG = -g -fsanitize=thread
 
 INCLUDES= -I includes/
 

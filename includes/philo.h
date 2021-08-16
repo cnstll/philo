@@ -16,12 +16,13 @@ typedef struct param_s
 	int		times_must_eat;
 }				param_t;
 
-typedef struct threads_s
+typedef struct philo_s
 {
+	pthread_mutex_t	lock;
+	pthread_mutex_t	*fork;
 	pthread_t		*philo;
-	pthread_mutex_t	mutex;
-	int				ret;
-}				threads_t;
+	int				*pos;
+}				philo_t;
 
 int			arguments_are_valid(char **args, int nb_args);
 long long	ft_atol(char *str, int *error);
