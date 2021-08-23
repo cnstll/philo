@@ -14,19 +14,27 @@ typedef struct param_s
 	long	time_to_eat;
 	long	time_to_sleep;
 	int		times_must_eat;
+	int		start_time;
 }				param_t;
 
 typedef struct philo_s
 {
-	int			place;
-	pthread_t	thread_id;
+	int				pos;
+	pthread_t		id;
+	long			tt_die;
+	long			tt_eat;
+	long			tt_sleep;
+	int				t_must_eat;
+	int				start_time;
+	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	*r_fork;
+	pthread_mutex_t	*print_lock;
 }				philo_t;
 
 typedef struct threads_data_s
 {
-	pthread_mutex_t	lock;
+	pthread_mutex_t	print_lock;
 	pthread_mutex_t	*fork;
-	int				*pos;
 	philo_t			**philos;
 }				threads_data_t;
 
@@ -36,5 +44,8 @@ int			ft_lite_atoi(char *s);
 int			is_digit(char character);
 int			is_within_int_range(long long number);
 void		*life_of_philo(void *data);
+void		ft_putstr(char *string);
+void		ft_putnbr(int nbr);
+int			get_time_in_ms(void);
 
 #endif

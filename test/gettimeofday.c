@@ -4,8 +4,8 @@
 
 int main() {
 	struct	timeval current_time;
-	long	start;
-	long	now;
+	int		start;
+	int		now;
 
 
 	gettimeofday(&current_time, NULL);
@@ -13,7 +13,7 @@ int main() {
 	usleep(1000);
 	gettimeofday(&current_time, NULL);
 	now = current_time.tv_usec;
-	printf("time elapsed ms : %ld\n",
+	printf("time elapsed ms : %d\n",
     (now - start)/1000);
 
   return 0;
