@@ -39,20 +39,19 @@ int	init_mutexes(philo_t *threads, param_t *param)
 	return (0);
 }
 
-int	init_philo(philo_t *data, param_t *param)
+int	init_philo(threads_data_t *data, param_t *param)
 {
 	int error;
 	int i;
 
-	data->philo = malloc(sizeof(philo_t) * param->num_of_philo);
-	if (!data->philo)
+	data->philos = malloc(sizeof(philo_t *) * param->num_of_philo);
+	if (!data->philos)
 		return (1);
 	error = 0;
 	i = 1;
-	data->pos = malloc(sizeof(int) * param->num_of_philo);
 	while (i <= param->num_of_philo && error == 0)
 	{
-		data->pos = i;
+		data->philos-> = i;
 		error = pthread_create(&data->philo[i - 1], NULL, life_of_philo, data);
 		i = i + 2;
 	}
@@ -73,8 +72,8 @@ int	init_philo(philo_t *data, param_t *param)
 
 int do_philo_simulation(char **args)
 {
-	param_t		parameters;
-	philo_t		data;
+	param_t			parameters;
+	threads_data_t	data;
 
 	init_parameters(args, &parameters);
 	if (init_mutexes(&data, &parameters))

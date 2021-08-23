@@ -18,11 +18,17 @@ typedef struct param_s
 
 typedef struct philo_s
 {
+	int			place;
+	pthread_t	thread_id;
+}				philo_t;
+
+typedef struct threads_data_s
+{
 	pthread_mutex_t	lock;
 	pthread_mutex_t	*fork;
-	pthread_t		*philo;
 	int				*pos;
-}				philo_t;
+	philo_t			**philos;
+}				threads_data_t;
 
 int			arguments_are_valid(char **args, int nb_args);
 long long	ft_atol(char *str, int *error);
