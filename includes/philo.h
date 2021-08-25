@@ -6,6 +6,8 @@
 # include <limits.h>
 # include <unistd.h>
 #include <stdio.h>
+# define LEFT_FORK 'l'
+# define RIGHT_FORK 'r'
 
 typedef struct param_s
 {
@@ -20,12 +22,16 @@ typedef struct param_s
 typedef struct philo_s
 {
 	int				pos;
-	pthread_t		id;
+	int				alive;
+	long			t_last_ate;
 	long			tt_die;
 	long			tt_eat;
 	long			tt_sleep;
 	int				t_must_eat;
 	int				start_time;
+	int				num_of_philo;
+	pthread_t		id;
+	pthread_t		death_watch_id;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*print_lock;
@@ -47,5 +53,7 @@ void		*life_of_philo(void *data);
 void		ft_putstr(char *string);
 void		ft_putnbr(int nbr);
 int			get_time_in_ms(void);
-
+void		*death_watch(void *threads_info);
+int			init_death_watch(philo_t *threads, pthread_t *death_watch_id);
+void		print_philo_status(char *status, int time, int philo_nbr);	
 #endif

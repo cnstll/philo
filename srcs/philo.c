@@ -38,6 +38,25 @@ int	init_mutexes(threads_data_t *threads, param_t *param)
 	return (0);
 }
 
+void	init_philo_param(philo_t *philo, threads_data_t *t, param_t *p, int i)
+{
+		philo->pos = i;
+		philo->alive = 1;
+		philo->num_of_philo = p->num_of_philo; 
+		philo->tt_die = p->time_to_die;
+		philo->t_last_ate = get_time_in_ms();
+		philo->tt_eat = p->time_to_eat;
+		philo->tt_sleep = p->time_to_sleep;
+		philo->t_must_eat = p->times_must_eat;
+		philo->start_time = p->start_time;
+		philo->print_lock = &t->print_lock;
+		philo->l_fork = &t->fork[i];
+		if (i + 1 == p->num_of_philo)
+			philo->r_fork = &t->fork[0];
+		else
+			philo->r_fork = &t->fork[i + 1];
+}
+
 int	init_philo(threads_data_t *threads, param_t *param)
 {
 	int error;
@@ -48,19 +67,10 @@ int	init_philo(threads_data_t *threads, param_t *param)
 	while (i < param->num_of_philo && error == 0)
 	{
 		threads->philos[i] = malloc(sizeof(philo_t));
-		threads->philos[i]->pos = i;
-		threads->philos[i]->tt_die = param->time_to_die;
-		threads->philos[i]->tt_eat = param->time_to_eat;
-		threads->philos[i]->tt_sleep = param->time_to_sleep;
-		threads->philos[i]->t_must_eat = param->times_must_eat;
-		threads->philos[i]->start_time = param->start_time;
-		threads->philos[i]->print_lock = &threads->print_lock;
-		threads->philos[i]->l_fork = &threads->fork[i];
-		if (i + 1 == param->num_of_philo)
-			threads->philos[i]->r_fork = &threads->fork[0];
-		else
-			threads->philos[i]->r_fork = &threads->fork[i + 1];
-		error = pthread_create(&threads->philos[i]->id, NULL, life_of_philo, threads->philos[i]);
+		init_philo_param(threads->philos[i], threads, param, i);
+		error = pthread_create(
+		&threads->philos[i]->id, NULL, life_of_philo, threads->philos[i]);
+		init_death_watch(threads->philos[i], &threads->philos[i]->death_watch_id);
 		i++;
 	}
 	if (error != 0)

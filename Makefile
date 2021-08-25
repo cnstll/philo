@@ -4,7 +4,8 @@ SRCS = srcs/philo.c \
 	   srcs/argument_checker.c \
 	   srcs/utils_1.c \
 	   srcs/utils_2.c \
-       srcs/life_of_philo.c
+       srcs/life_of_philo.c \
+       srcs/death_of_philo.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -18,7 +19,7 @@ UNAME_S := $(shell uname -s)
 
 CFLAGS = -Wall -Wextra -Werror -pthread
 
-GFLAG = -g -fsanitize=thread
+GFLAG = -g #-fsanitize=thread
 
 INCLUDES= -I includes/
 
