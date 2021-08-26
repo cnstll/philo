@@ -21,7 +21,7 @@
 *.a
 *.la
 *.lo
-
+*.swp
 # Shared objects (inc. Windows DLLs)
 *.dll
 *.so

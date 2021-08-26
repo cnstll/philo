@@ -16,8 +16,8 @@ void	thinking(philo_t *philo)
 	pthread_mutex_lock(philo->print_lock);
 	philo_pos = philo->pos + 1;
 	current_time = get_time_in_ms();
-	print_philo_status(" is thinking\n", current_time - philo->start_time, philo_pos);
-	usleep(1000);
+	if (*philo->someone_died == 0)
+		print_philo_status(" is thinking\n", current_time - philo->start_time, philo_pos);
 	pthread_mutex_unlock(philo->print_lock);
 }
 
@@ -29,9 +29,10 @@ void	sleeping(philo_t *philo)
 	pthread_mutex_lock(philo->print_lock);
 	philo_pos = philo->pos + 1;
 	current_time = get_time_in_ms();
-	print_philo_status(" is sleeping\n", current_time - philo->start_time, philo_pos);
-	usleep(philo->tt_sleep);
+	if (*philo->someone_died == 0)
+		print_philo_status(" is sleeping\n", current_time - philo->start_time, philo_pos);
 	pthread_mutex_unlock(philo->print_lock);
+	ms_sleep(philo->tt_sleep);
 }
 
 void	eating(philo_t *philo)
@@ -42,11 +43,12 @@ void	eating(philo_t *philo)
 	pthread_mutex_lock(philo->print_lock);
 	philo_pos = philo->pos + 1;
 	current_time = get_time_in_ms();
-	print_philo_status(" is eating\n", current_time - philo->start_time, philo_pos);
-	usleep(philo->tt_eat);
+	if (*philo->someone_died == 0)
+		print_philo_status(" is eating\n", current_time - philo->start_time, philo_pos);
 	philo->t_must_eat--;
 	philo->t_last_ate = current_time;
 	pthread_mutex_unlock(philo->print_lock);
+	ms_sleep(philo->tt_eat);
 }
 
 void	get_fork(philo_t *philo, char fork_side)
@@ -61,7 +63,8 @@ void	get_fork(philo_t *philo, char fork_side)
 	pthread_mutex_lock(philo->print_lock);
 	philo_pos = philo->pos + 1;
 	current_time = get_time_in_ms();
-	print_philo_status(" has taken a fork\n", current_time - philo->start_time, philo_pos);
+	if (*philo->someone_died == 0)
+		print_philo_status(" has taken a fork\n", current_time - philo->start_time, philo_pos);
 	pthread_mutex_unlock(philo->print_lock);
 }
 
@@ -78,26 +81,17 @@ void	*life_of_philo(void *thread_infos)
 	philo_t	*philo;
 	
 	philo = (philo_t *)(thread_infos);
-	while (1 && philo->t_must_eat > 0 && philo->alive)
+	if (philo->pos % 2)
+		usleep(15000);
+	while (philo->t_must_eat > 0 && philo->alive && *philo->someone_died == 0)
 	{
-		thinking(philo);
-		if (philo->pos + 1 == philo->num_of_philo)
-		{
-			get_fork(philo, RIGHT_FORK);
-			get_fork(philo, LEFT_FORK);
-			eating(philo);
-			put_fork_down(philo, LEFT_FORK);
-			put_fork_down(philo, RIGHT_FORK);
-		}
-		else
-		{
-			get_fork(philo, LEFT_FORK);
-			get_fork(philo, RIGHT_FORK);
-			eating(philo);
-			put_fork_down(philo, RIGHT_FORK);
-			put_fork_down(philo, LEFT_FORK);
-		}
+		get_fork(philo, RIGHT_FORK);
+		get_fork(philo, LEFT_FORK);
+		eating(philo);
+		put_fork_down(philo, LEFT_FORK);
+		put_fork_down(philo, RIGHT_FORK);
 		sleeping(philo);
+		thinking(philo);
 	}
 	return (0);
 }

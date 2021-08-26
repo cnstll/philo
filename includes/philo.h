@@ -35,13 +35,17 @@ typedef struct philo_s
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*print_lock;
+	pthread_mutex_t	*died_lock;
+	int				*someone_died;
 }				philo_t;
 
 typedef struct threads_data_s
 {
 	pthread_mutex_t	print_lock;
+	pthread_mutex_t	died_lock;
 	pthread_mutex_t	*fork;
 	philo_t			**philos;
+	int				someone_died;
 }				threads_data_t;
 
 int			arguments_are_valid(char **args, int nb_args);
@@ -53,6 +57,7 @@ void		*life_of_philo(void *data);
 void		ft_putstr(char *string);
 void		ft_putnbr(int nbr);
 int			get_time_in_ms(void);
+void		ms_sleep(int sleep_time);
 void		*death_watch(void *threads_info);
 int			init_death_watch(philo_t *threads, pthread_t *death_watch_id);
 void		print_philo_status(char *status, int time, int philo_nbr);	

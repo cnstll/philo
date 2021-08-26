@@ -4,6 +4,7 @@ SRCS = srcs/philo.c \
 	   srcs/argument_checker.c \
 	   srcs/utils_1.c \
 	   srcs/utils_2.c \
+	   srcs/utils_3.c \
        srcs/life_of_philo.c \
        srcs/death_of_philo.c
 
