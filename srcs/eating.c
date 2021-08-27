@@ -54,7 +54,9 @@ void	eating(philo_t *philo)
 	pthread_mutex_lock(philo->ate_lock);
 	philo->t_last_ate = current_time;
 	pthread_mutex_unlock(philo->ate_lock);
+	pthread_mutex_lock(philo->must_eat_lock);
 	philo->t_must_eat--;
+	pthread_mutex_unlock(philo->must_eat_lock);
 	ms_sleep(philo->tt_eat);
 	put_fork_down(philo, LEFT_FORK);
 	put_fork_down(philo, RIGHT_FORK);

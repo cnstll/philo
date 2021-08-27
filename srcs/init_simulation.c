@@ -35,6 +35,8 @@ int	init_mutexes(threads_data_t *threads, param_t *param)
 		return (1);
 	if (pthread_mutex_init(&threads->ate_lock, NULL) != 0)
 		return (1);
+	if (pthread_mutex_init(&threads->must_eat_lock, NULL) != 0)
+		return (1);
 	return (0);
 }
 
@@ -51,6 +53,7 @@ philo_t *philo, threads_data_t *t, param_t *p, int i)
 		philo->print_lock = &t->print_lock;
 		philo->died_lock = &t->died_lock;
 		philo->ate_lock = &t->ate_lock;
+		philo->must_eat_lock = &t->must_eat_lock;
 		philo->l_fork = &t->fork[i];
 		if (i + 1 == p->num_of_philo)
 			philo->r_fork = &t->fork[0];

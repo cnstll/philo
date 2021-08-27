@@ -5,8 +5,8 @@
 # include <sys/time.h>
 # include <limits.h>
 # include <unistd.h>
-# define SIM_ERROR "ERROR: error encountered during simulation" 
-# define ARG_ERROR "ERROR: invalid arguments"  
+# define SIM_ERROR "ERROR: error encountered during simulation\n" 
+# define ARG_ERROR "ERROR: invalid or too many or too few arguments\n"
 # define LEFT_FORK 'l'
 # define RIGHT_FORK 'r'
 # define THINK " is thinking\n" 
@@ -49,6 +49,7 @@ typedef struct philo_s
 	pthread_mutex_t	*print_lock;
 	pthread_mutex_t	*died_lock;
 	pthread_mutex_t	*ate_lock;
+	pthread_mutex_t	*must_eat_lock;
 	int				*someone_died;
 }				philo_t;
 
@@ -60,6 +61,7 @@ typedef struct threads_data_s
 	pthread_mutex_t	print_lock;
 	pthread_mutex_t	died_lock;
 	pthread_mutex_t	ate_lock;
+	pthread_mutex_t	must_eat_lock;
 	pthread_mutex_t	*fork;
 	philo_t			**philos;
 	int				someone_died;
