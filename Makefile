@@ -2,11 +2,16 @@ NAME = philo
 
 SRCS = srcs/philo.c \
 	   srcs/argument_checker.c \
+	   srcs/init_simulation.c \
+       srcs/life_of_philo.c \
+	   srcs/eating.c \
+	   srcs/thinking.c \
+	   srcs/sleeping.c \
+       srcs/death_of_philo.c \
+	   srcs/clean_before_exit.c \
 	   srcs/utils_1.c \
 	   srcs/utils_2.c \
-	   srcs/utils_3.c \
-       srcs/life_of_philo.c \
-       srcs/death_of_philo.c
+	   srcs/utils_3.c
 
 OBJS = $(SRCS:.c=.o)
 

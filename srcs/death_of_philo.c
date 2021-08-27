@@ -1,18 +1,6 @@
 #include "../includes/philo.h"
 
-int	init_death_watch(philo_t *philo, pthread_t *death_watch_id)
-{
-	int			error;
-
-	error = 0;
-	error = pthread_create(death_watch_id, NULL, death_watch, philo);
-	if (error != 0)
-		return (1);
-	pthread_detach(*death_watch_id);
-	return (0);
-}
-
-int	is_philo_still_alive(philo_t *philo)
+static int	is_philo_still_alive(philo_t *philo)
 {
 	int	current_time;
 
@@ -20,24 +8,39 @@ int	is_philo_still_alive(philo_t *philo)
 	return (current_time - philo->t_last_ate < philo->tt_die);
 }
 
-void	*death_watch(void *philo_data)
+void	someone_died(threads_data_t *threads)
 {
+	pthread_mutex_lock(&threads->died_lock);
+	threads->someone_died = 1;
+	pthread_mutex_unlock(&threads->died_lock);
+}
+
+void	death_watch(threads_data_t *d)
+{
+	int	i;
 	philo_t	*philo;
 
-	philo = (philo_t *)(philo_data);
-	while (philo->alive && philo->t_must_eat > 0 && *philo->someone_died == 0)
+	while (!d->someone_died)
 	{
-		if (!is_philo_still_alive(philo))
+		i = 0;
+		while (d->num_of_philos > i)
 		{
-			philo->alive = 0;
-			pthread_mutex_lock(philo->died_lock);
-			*philo->someone_died = 1;
-			pthread_mutex_unlock(philo->died_lock);
-			pthread_mutex_lock(philo->print_lock);
-			print_philo_status(" died\n", get_time_in_ms() - philo->start_time, philo->pos + 1);
-			pthread_mutex_unlock(philo->print_lock);
+			philo = d->philos[i];
+			if (philo->t_must_eat > 0 && !is_philo_still_alive(philo))
+			{
+				someone_died(d);
+				pthread_mutex_lock(&d->print_lock);
+				print_philo_status(
+					DEAD, get_time_in_ms() - philo->start_time, philo->pos + 1);
+				pthread_mutex_unlock(&d->print_lock);
+				break ;
+			}
+			usleep(100);
+			i++;
 		}
-		usleep(100);
+		while (i - 1 >= 0 && d->philos[i - 1]->t_must_eat == 0)
+			i--;
+		if (i == 0)
+			break;
 	}
-	return (0);
 }

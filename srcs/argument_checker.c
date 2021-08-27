@@ -11,7 +11,8 @@ int	arguments_are_valid(char **args, int nb_args)
 	{
 		err = 0;
 		j = 0;
-		if ((i == 1 || i == 5) && !is_within_int_range(ft_atol(args[i], &err)))
+		if (!is_within_int_range(ft_atol(args[i], &err))
+			|| ft_atol(args[i], &err) < 1)
 			return (1);
 		else
 			ft_atol(args[i], &err);

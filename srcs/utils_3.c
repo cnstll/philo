@@ -15,3 +15,11 @@ void	ms_sleep(int sleep_time)
 		usleep(tic);
 	}
 }
+
+void	print_philo_status(char *status, int time, int philo_nbr)
+{
+	ft_putnbr(time);
+	ft_putstr(" ");
+	ft_putnbr(philo_nbr);
+	ft_putstr(status);
+}
