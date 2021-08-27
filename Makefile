@@ -25,7 +25,7 @@ UNAME_S := $(shell uname -s)
 
 CFLAGS = -Wall -Wextra -Werror -pthread
 
-GFLAG = -g #-fsanitize=thread
+GFLAG = -g -fsanitize=thread
 
 INCLUDES= -I includes/
 

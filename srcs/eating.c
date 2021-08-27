@@ -28,13 +28,23 @@ void	put_fork_down(philo_t *philo, char fork_side)
 		pthread_mutex_unlock(philo->l_fork);
 }
 
+
+
 void	eating(philo_t *philo)
 {
 	int	current_time;
 	int	philo_pos;
 
-	get_fork(philo, RIGHT_FORK);
-	get_fork(philo, LEFT_FORK);
+	if (philo->pos + 1 == philo->num_of_philo)
+	{
+		get_fork(philo, LEFT_FORK);
+		get_fork(philo, RIGHT_FORK);
+	}
+	else
+	{
+		get_fork(philo, RIGHT_FORK);
+		get_fork(philo, LEFT_FORK);
+	}
 	pthread_mutex_lock(philo->print_lock);
 	philo_pos = philo->pos + 1;
 	current_time = get_time_in_ms();
