@@ -50,8 +50,10 @@ void	eating(philo_t *philo)
 	current_time = get_time_in_ms();
 	if (*philo->someone_died == 0)
 		print_philo_status(EAT, current_time - philo->start_time, philo_pos);
-	philo->t_last_ate = current_time;
 	pthread_mutex_unlock(philo->print_lock);
+	pthread_mutex_lock(philo->ate_lock);
+	philo->t_last_ate = current_time;
+	pthread_mutex_unlock(philo->ate_lock);
 	philo->t_must_eat--;
 	ms_sleep(philo->tt_eat);
 	put_fork_down(philo, LEFT_FORK);

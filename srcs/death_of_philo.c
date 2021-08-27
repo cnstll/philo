@@ -3,9 +3,13 @@
 static int	is_philo_still_alive(philo_t *philo)
 {
 	int	current_time;
+	int	diff_time;
 
 	current_time = get_time_in_ms();
-	return (current_time - philo->t_last_ate < philo->tt_die);
+	pthread_mutex_lock(philo->ate_lock);
+	diff_time = current_time - philo->t_last_ate;
+	pthread_mutex_unlock(philo->ate_lock);
+	return ( diff_time < philo->tt_die);
 }
 
 void	someone_died(threads_data_t *threads)

@@ -33,6 +33,8 @@ int	init_mutexes(threads_data_t *threads, param_t *param)
 		return (1);
 	if (pthread_mutex_init(&threads->died_lock, NULL) != 0)
 		return (1);
+	if (pthread_mutex_init(&threads->ate_lock, NULL) != 0)
+		return (1);
 	return (0);
 }
 
@@ -48,6 +50,7 @@ philo_t *philo, threads_data_t *t, param_t *p, int i)
 		philo->start_time = p->start_time;
 		philo->print_lock = &t->print_lock;
 		philo->died_lock = &t->died_lock;
+		philo->ate_lock = &t->ate_lock;
 		philo->l_fork = &t->fork[i];
 		if (i + 1 == p->num_of_philo)
 			philo->r_fork = &t->fork[0];
@@ -68,6 +71,7 @@ int	init_philo(threads_data_t *threads, param_t *param)
 	{
 		threads->philos[i] = malloc(sizeof(philo_t));
 		init_philo_param(threads->philos[i], threads, param, i);
+		threads->philos[i]->t_last_ate = get_time_in_ms();
 		if (param->num_of_philo == 1)
 		{
 			error = pthread_create(
@@ -78,7 +82,6 @@ int	init_philo(threads_data_t *threads, param_t *param)
 			error = pthread_create(
 			&threads->philos[i]->id, NULL, life_of_philo, threads->philos[i]);
 		}
-		threads->philos[i]->t_last_ate = get_time_in_ms();
 		i++;
 	}
 	if (error != 0)

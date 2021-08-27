@@ -48,6 +48,7 @@ typedef struct philo_s
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*print_lock;
 	pthread_mutex_t	*died_lock;
+	pthread_mutex_t	*ate_lock;
 	int				*someone_died;
 }				philo_t;
 
@@ -58,6 +59,7 @@ typedef struct threads_data_s
 {
 	pthread_mutex_t	print_lock;
 	pthread_mutex_t	died_lock;
+	pthread_mutex_t	ate_lock;
 	pthread_mutex_t	*fork;
 	philo_t			**philos;
 	int				someone_died;
