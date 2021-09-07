@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   clean_before_exit.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: calle <calle@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/07 18:16:19 by calle             #+#    #+#             */
+/*   Updated: 2021/09/07 18:16:35 by calle            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/philo.h"
 
-static void	destroy_philos(threads_data_t *threads, param_t *param)
+static void	destroy_philos(t_threads_data *threads, t_param *param)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < param->num_of_philo)
@@ -12,9 +24,9 @@ static void	destroy_philos(threads_data_t *threads, param_t *param)
 	}
 }
 
-static void	free_philos(threads_data_t *threads, param_t *param)
+static void	free_philos(t_threads_data *threads, t_param *param)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < param->num_of_philo)
@@ -24,9 +36,9 @@ static void	free_philos(threads_data_t *threads, param_t *param)
 	}
 }
 
-static void	destroy_mutexes(threads_data_t *threads, param_t *param)
+static void	destroy_mutexes(t_threads_data *threads, t_param *param)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < param->num_of_philo)
@@ -38,7 +50,7 @@ static void	destroy_mutexes(threads_data_t *threads, param_t *param)
 	pthread_mutex_destroy(&threads->died_lock);
 }
 
-void	threads_cleaning_wrapper(threads_data_t *threads, param_t *param)
+void	threads_cleaning_wrapper(t_threads_data *threads, t_param *param)
 {
 	destroy_philos(threads, param);
 	free_philos(threads, param);

@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: calle <calle@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/07 18:13:38 by calle             #+#    #+#             */
+/*   Updated: 2021/09/07 18:13:58 by calle            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/philo.h"
 
-int do_philo_simulation(char **args)
+int	do_philo_simulation(char **args)
 {
-	param_t			param;
-	threads_data_t	threads;
+	t_param			param;
+	t_threads_data	threads;
 
 	init_parameters(args, &param);
 	threads.someone_died = 0;
@@ -11,7 +23,7 @@ int do_philo_simulation(char **args)
 	threads.fork = malloc(sizeof(pthread_mutex_t) * param.num_of_philo);
 	if (!threads.fork)
 		return (1);
-	threads.philos = malloc(sizeof(philo_t *) * param.num_of_philo);
+	threads.philos = malloc(sizeof(t_philo *) * param.num_of_philo);
 	if (!threads.philos)
 	{
 		free(threads.fork);
@@ -24,7 +36,7 @@ int do_philo_simulation(char **args)
 	return (0);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	if (argc == 6 && !arguments_are_valid(argv, argc))
 	{

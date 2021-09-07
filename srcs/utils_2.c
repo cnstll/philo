@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: calle <calle@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/07 18:15:27 by calle             #+#    #+#             */
+/*   Updated: 2021/09/07 18:15:36 by calle            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/philo.h"
 
-int		ft_lite_atoi(char *s)
+int	ft_lite_atoi(char *s)
 {
 	char	*nbr;
 	int		n;
@@ -44,13 +56,13 @@ void	ft_putnbr(int	nbr)
 		ft_putnbr(nbr / 10);
 		ft_putnbr(nbr % 10);
 	}
-	else 
+	else
 		ft_putchar(nbr + '0');
 }
 
-int		get_time_in_ms(void)
+int	get_time_in_ms(void)
 {
-	struct	timeval current_time;
+	struct timeval	current_time;
 
 	gettimeofday(&current_time, NULL);
 	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   eating.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: calle <calle@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/07 18:16:42 by calle             #+#    #+#             */
+/*   Updated: 2021/09/07 18:16:55 by calle            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include  "../includes/philo.h"
 
-void	get_fork(philo_t *philo, char fork_side)
+void	get_fork(t_philo *philo, char fork_side)
 {
 	int	current_time;
 	int	philo_pos;
@@ -15,12 +27,12 @@ void	get_fork(philo_t *philo, char fork_side)
 	if (*philo->someone_died == 0)
 	{
 		print_philo_status(
-				TAKE_FORK ,current_time - philo->start_time, philo_pos);
+			TAKE_FORK, current_time - philo->start_time, philo_pos);
 	}
 	pthread_mutex_unlock(philo->print_lock);
 }
 
-void	put_fork_down(philo_t *philo, char fork_side)
+void	put_fork_down(t_philo *philo, char fork_side)
 {
 	if (fork_side == 'r')
 		pthread_mutex_unlock(philo->r_fork);
@@ -28,14 +40,9 @@ void	put_fork_down(philo_t *philo, char fork_side)
 		pthread_mutex_unlock(philo->l_fork);
 }
 
-
-
-void	eating(philo_t *philo)
+static void	chose_forks(t_philo *philo, int philo_pos)
 {
-	int	current_time;
-	int	philo_pos;
-
-	if (philo->pos + 1 == philo->num_of_philo)
+	if (philo_pos == philo->num_of_philo)
 	{
 		get_fork(philo, LEFT_FORK);
 		get_fork(philo, RIGHT_FORK);
@@ -45,10 +52,18 @@ void	eating(philo_t *philo)
 		get_fork(philo, RIGHT_FORK);
 		get_fork(philo, LEFT_FORK);
 	}
-	pthread_mutex_lock(philo->print_lock);
+}
+
+void	eating(t_philo *philo)
+{
+	int	current_time;
+	int	philo_pos;
+
 	philo_pos = philo->pos + 1;
+	chose_forks(philo, philo_pos);
 	current_time = get_time_in_ms();
-	if (*philo->someone_died == 0)
+	pthread_mutex_lock(philo->print_lock);
+	if (!check_if_philo_died(philo))
 		print_philo_status(EAT, current_time - philo->start_time, philo_pos);
 	pthread_mutex_unlock(philo->print_lock);
 	pthread_mutex_lock(philo->ate_lock);

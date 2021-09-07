@@ -25,7 +25,10 @@ UNAME_S := $(shell uname -s)
 
 CFLAGS = -Wall -Wextra -Werror -pthread
 
-GFLAG = -g -fsanitize=thread
+DFLAG = -g -fsanitize=thread
+
+DLEAKS_FLAG = -g -fsanitize=address
+
 
 INCLUDES= -I includes/
 
@@ -38,7 +41,10 @@ $(NAME) : $(OBJS)
 	$(CC) -o $@ -c $^ $(CFLAGS) $(INCLUDES)
 
 debug :
-	$(CC) $(CFLAGS) $(GFLAG) -o $(NAME) $(SRCS)
+	$(CC) $(CFLAGS) $(DFLAG) -o $(NAME) $(SRCS)
+
+debug_leaks :
+	$(CC) $(CFLAGS) $(DLEAKS_FLAG) -o $(NAME) $(SRCS)
 
 clean :
 	rm -f $(OBJS)
