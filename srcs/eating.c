@@ -6,7 +6,7 @@
 /*   By: calle <calle@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 18:16:42 by calle             #+#    #+#             */
-/*   Updated: 2021/09/07 18:16:55 by calle            ###   ########.fr       */
+/*   Updated: 2021/09/08 11:39:09 by calle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,10 @@ void	put_fork_down(t_philo *philo, char fork_side)
 		pthread_mutex_unlock(philo->l_fork);
 }
 
-static void	chose_forks(t_philo *philo, int philo_pos)
+static void	pick_forks(t_philo *philo)
 {
-	if (philo_pos == philo->num_of_philo)
-	{
-		get_fork(philo, LEFT_FORK);
-		get_fork(philo, RIGHT_FORK);
-	}
-	else
-	{
-		get_fork(philo, RIGHT_FORK);
-		get_fork(philo, LEFT_FORK);
-	}
+	get_fork(philo, RIGHT_FORK);
+	get_fork(philo, LEFT_FORK);
 }
 
 void	eating(t_philo *philo)
@@ -60,7 +52,7 @@ void	eating(t_philo *philo)
 	int	philo_pos;
 
 	philo_pos = philo->pos + 1;
-	chose_forks(philo, philo_pos);
+	pick_forks(philo);
 	current_time = get_time_in_ms();
 	pthread_mutex_lock(philo->print_lock);
 	if (!check_if_philo_died(philo))
