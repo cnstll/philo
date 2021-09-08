@@ -12,11 +12,11 @@ Philosophers must not talk to each other when trying to pick a fork and eat, mea
 The project must be fulfilled using only mutexes - semaphores are only available for the bonus part.
 
 ## Notions Covered during the project
-* Thread: the execution of a set of instructions within a process. Multiple threads might be initialized within a process, which enable parrallel execution of instructions within a program - and asynchronicity. Threads share the virtual memory of the process they start from. This feature may produce conccurency when threads try to access the same data in memory (read or write). 
-* Mutex: Functions that protects a critical piece of code from being accessed by multiple threads at the same time.  
-* Parrallelism: when 2 or more threads routines are executed simultaneously while interacting with
+* **Thread**: the execution of a set of instructions within a process. Multiple threads might be initialized within a process, which enable parrallel execution of instructions within a program - and asynchronicity. Threads share the virtual memory of the process they start from. This feature may produce conccurency when threads try to access the same data in memory (read or write). 
+* **Mutex**: Functions that protects a critical piece of code from being accessed by multiple threads at the same time.  
+* **Parrallelism**: when 2 or more threads routines are executed simultaneously while interacting with
  *distinct* data elements.  
-* Concurrency: when 2 or more threads routines are executed simultaneously while interacting with
+* **Concurrency**: when 2 or more threads routines are executed simultaneously while interacting with
  *same* data elements. 
-* Data race: When 2 or more threads have a high level of concurrency, they end up reading/writting the same data at the same time which may result in data inconsistancy/incoherence. In this context, mutexes and semaphores are relevant to lock and synchronize data through the execution of the process. 
-* Deadlocks: When 2 or more thread/processes mutually await for each other resources, hence locking each other execution indefinetly. 
+* **Data race**: When 2 or more threads have a high level of concurrency, they end up reading/writting the same data at the same time which may result in data inconsistancy/incoherence. In this context, mutexes and semaphores are relevant to lock and synchronize data through the execution of the process. 
+* **Deadlocks**: When 2 or more thread/processes mutually await for each other resources, hence locking each other execution indefinetly. 
