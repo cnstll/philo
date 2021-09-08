@@ -20,3 +20,7 @@ The project must be fulfilled using only mutexes - semaphores are only available
  *same* data elements. 
 * **Data race**: When 2 or more threads have a high level of concurrency, they end up reading/writting the same data at the same time which may result in data inconsistancy/incoherence. In this context, mutexes and semaphores are relevant to lock and synchronize data through the execution of the process. 
 * **Deadlocks**: When 2 or more thread/processes mutually await for each other resources, hence locking each other execution indefinetly. 
+
+## Sources
+* https://en.wikipedia.org/wiki/Dining_philosophers_problem
+* https://code-vault.net/course/6q6s9eerd0:1609007479575
