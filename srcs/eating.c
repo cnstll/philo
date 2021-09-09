@@ -6,7 +6,7 @@
 /*   By: calle <calle@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 18:16:42 by calle             #+#    #+#             */
-/*   Updated: 2021/09/09 12:44:23 by calle            ###   ########.fr       */
+/*   Updated: 2021/09/09 13:13:54 by calle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	get_fork(t_philo *philo, char fork_side)
 	pthread_mutex_lock(philo->print_lock);
 	philo_pos = philo->pos + 1;
 	current_time = get_time_in_ms();
-	if (*philo->someone_died == 0)
+	if (!check_if_philo_died(philo))
 	{
 		print_philo_status(
 			TAKE_FORK, current_time - philo->start_time, philo_pos);
