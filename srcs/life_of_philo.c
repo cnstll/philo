@@ -6,7 +6,7 @@
 /*   By: calle <calle@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 18:17:03 by calle             #+#    #+#             */
-/*   Updated: 2021/09/09 11:15:30 by calle            ###   ########.fr       */
+/*   Updated: 2021/09/09 12:52:12 by calle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	*life_of_philo(void *thread_infos)
 
 	philo = (t_philo *)(thread_infos);
 	if (philo->pos % 2)
-		usleep(900);
+		ms_sleep(1);
 	while (!philo_is_full(philo) && !check_if_philo_died(philo))
 	{
 		eating(philo);

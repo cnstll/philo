@@ -6,7 +6,7 @@
 /*   By: calle <calle@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 18:11:25 by calle             #+#    #+#             */
-/*   Updated: 2021/09/07 18:13:19 by calle            ###   ########.fr       */
+/*   Updated: 2021/09/09 12:45:46 by calle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	death_watch(t_threads_data *d)
 				print_death(d, d->philos[i]);
 				break ;
 			}
-			usleep(100);
+			usleep(1000);
 			i++;
 		}
 		while (--i >= 0)
