@@ -6,18 +6,18 @@
 /*   By: calle <calle@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 18:13:38 by calle             #+#    #+#             */
-/*   Updated: 2021/09/08 10:23:46 by calle            ###   ########.fr       */
+/*   Updated: 2021/09/09 11:18:48 by calle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	do_philo_simulation(char **args)
+static int	do_philo_simulation(int argc, char **args)
 {
 	t_param			param;
 	t_threads_data	threads;
 
-	init_parameters(args, &param);
+	init_parameters(argc, args, &param);
 	threads.someone_died = 0;
 	threads.num_of_philos = param.num_of_philo;
 	threads.fork = malloc(sizeof(pthread_mutex_t) * param.num_of_philo);
@@ -38,9 +38,9 @@ int	do_philo_simulation(char **args)
 
 int	main(int argc, char **argv)
 {
-	if (argc == 6 && !arguments_are_valid(argv, argc))
+	if ((argc == 5 || argc == 6) && !arguments_are_valid(argv, argc))
 	{
-		if (do_philo_simulation(argv))
+		if (do_philo_simulation(argc, argv))
 		{
 			ft_putstr(SIM_ERROR);
 			return (1);

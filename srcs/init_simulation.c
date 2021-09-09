@@ -6,13 +6,13 @@
 /*   By: calle <calle@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 18:11:49 by calle             #+#    #+#             */
-/*   Updated: 2021/09/08 12:04:48 by calle            ###   ########.fr       */
+/*   Updated: 2021/09/09 11:18:02 by calle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	init_parameters(char **args, t_param *param)
+int	init_parameters(int argc, char **args, t_param *param)
 {
 	int	error;
 
@@ -21,7 +21,10 @@ int	init_parameters(char **args, t_param *param)
 	param->time_to_die = ft_lite_atoi(args[2]);
 	param->time_to_eat = ft_lite_atoi(args[3]);
 	param->time_to_sleep = ft_lite_atoi(args[4]);
-	param->times_must_eat = ft_lite_atoi(args[5]);
+	if (argc == 5)
+		param->times_must_eat = INT_MAX;
+	else
+		param->times_must_eat = ft_lite_atoi(args[5]);
 	if (param->num_of_philo == 0)
 		return (1);
 	return (0);

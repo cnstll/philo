@@ -6,7 +6,7 @@
 /*   By: calle <calle@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 18:20:24 by calle             #+#    #+#             */
-/*   Updated: 2021/09/07 18:30:33 by calle            ###   ########.fr       */
+/*   Updated: 2021/09/09 11:19:25 by calle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void		*life_of_1_philo(void *data);
 ** ------------------ INIT MUTEX, THREADS AND MEM ------------------
 */
 int			init_mutexes(t_threads_data *threads, t_param *param);
-int			init_parameters(char **args, t_param *param);
+int			init_parameters(int argc, char **args, t_param *param);
 int			init_philo(t_threads_data *threads, t_param *param);
 /*
 ** ------------------ PHILO ACTIONS ------------------
