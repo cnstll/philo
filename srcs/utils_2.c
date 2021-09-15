@@ -6,7 +6,7 @@
 /*   By: calle <calle@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 18:15:27 by calle             #+#    #+#             */
-/*   Updated: 2021/09/07 18:15:36 by calle            ###   ########.fr       */
+/*   Updated: 2021/09/15 10:11:43 by calle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_putstr(char *string)
 	}
 }
 
-void	ft_putnbr(int	nbr)
+void	ft_putnbr(int nbr)
 {
 	if (nbr >= 10)
 	{
