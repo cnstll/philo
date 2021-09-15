@@ -6,11 +6,11 @@
 /*   By: calle <calle@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 18:17:03 by calle             #+#    #+#             */
-/*   Updated: 2021/09/15 10:15:10 by calle            ###   ########.fr       */
+/*   Updated: 2021/09/15 11:20:28 by calle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../includes/philo.h"
+#include "../includes/philo.h"
 
 void	*life_of_1_philo(void *thread_infos)
 {

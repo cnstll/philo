@@ -6,11 +6,11 @@
 /*   By: calle <calle@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 18:17:30 by calle             #+#    #+#             */
-/*   Updated: 2021/09/09 15:09:10 by calle            ###   ########.fr       */
+/*   Updated: 2021/09/15 11:19:52 by calle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../includes/philo.h"
+#include "../includes/philo.h"
 
 void	sleeping(t_philo *philo)
 {

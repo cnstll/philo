@@ -6,11 +6,11 @@
 /*   By: calle <calle@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 18:16:42 by calle             #+#    #+#             */
-/*   Updated: 2021/09/09 13:13:54 by calle            ###   ########.fr       */
+/*   Updated: 2021/09/15 11:20:01 by calle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../includes/philo.h"
+#include "../includes/philo.h"
 
 void	get_fork(t_philo *philo, char fork_side)
 {

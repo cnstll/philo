@@ -6,11 +6,11 @@
 /*   By: calle <calle@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 18:14:09 by calle             #+#    #+#             */
-/*   Updated: 2021/09/09 15:09:19 by calle            ###   ########.fr       */
+/*   Updated: 2021/09/15 11:19:37 by calle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../includes/philo.h"
+#include "../includes/philo.h"
 
 void	thinking(t_philo *philo)
 {
